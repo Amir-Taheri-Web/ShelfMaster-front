@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<TLayout> = ({ children }) => {
   return (
-    <html lang="fa-IR" dir="rtl">
+    <html lang="fa-IR" dir="rtl" className="bg-back-1">
       <body className={vazirFont.className}>{children}</body>
     </html>
   );
