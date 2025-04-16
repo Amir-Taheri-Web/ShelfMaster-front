@@ -26,6 +26,7 @@
   --color-txt-4: #3a8bed;
   --color-txt-5: #8d8d8d80;
   --color-txt-6: #00000099;
+  --color-txt-7: #8D8D8D;
 
   --color-icon-1: #292d32;
 
@@ -131,4 +132,16 @@
   &::-webkit-scrollbar-thumb:hover {
     background: transparent;
   }
+}
+
+@utility modal-input-wrapper {
+  @apply flex flex-col gap-2
+}
+
+@utility modal-input-label {
+  @apply font-medium text-sm text-txt-1;
+}
+
+@utility modal-input {
+  @apply bg-back-3 rounded-lg py-3 px-2 w-full text-sm text-txt-1 font-light placeholder:text-txt-7;
 }

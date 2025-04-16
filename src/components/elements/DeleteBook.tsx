@@ -9,7 +9,7 @@ import {
 import Image from "next/image";
 import deleteImage from "@/public/images/delete.png";
 
-const DeleteButton = () => {
+const DeleteBook = () => {
   return (
     <div>
       <Dialog>
@@ -40,4 +40,4 @@ const DeleteButton = () => {
   );
 };
 
-export default DeleteButton;
+export default DeleteBook;

@@ -1,5 +1,5 @@
 import BOOKS from "@/data/index.data";
-import DeleteButton from "@/elements/DeleteButton";
+import DeleteBook from "@/elements/DeleteBook";
 import { e2p } from "@/utils/convert";
 import { SquarePen } from "lucide-react";
 
@@ -35,7 +35,7 @@ const BookList = () => {
                   <SquarePen className="size-[20px]" />
                 </button>
 
-                <DeleteButton />
+                <DeleteBook />
               </span>
             </li>
           ))}
