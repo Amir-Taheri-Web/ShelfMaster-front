@@ -1,8 +1,7 @@
 import BOOKS from "@/data/index.data";
 import DeleteBook from "@/elements/DeleteBook";
+import EditBook from "@/elements/EditBook";
 import { e2p } from "@/utils/convert";
-import { SquarePen } from "lucide-react";
-
 const BookList = () => {
   return (
     <div className="overflow-x-auto grow">
@@ -28,12 +27,7 @@ const BookList = () => {
               <span className="w-[100px]">{e2p(item.price)} هزار تومان</span>
               <span className="w-[150px]">{item.id}</span>
               <span className="flex items-center gap-4 w-[56px]">
-                <button
-                  type="button"
-                  className="text-btn-3 hover:opacity-70 transition-all"
-                >
-                  <SquarePen className="size-[20px]" />
-                </button>
+                <EditBook/>
 
                 <DeleteBook />
               </span>
