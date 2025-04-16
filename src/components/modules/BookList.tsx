@@ -1,7 +1,7 @@
 import BOOKS from "@/data/index.data";
+import DeleteButton from "@/elements/DeleteButton";
 import { e2p } from "@/utils/convert";
 import { SquarePen } from "lucide-react";
-import { Trash2 } from "lucide-react";
 
 const BookList = () => {
   return (
@@ -35,12 +35,7 @@ const BookList = () => {
                   <SquarePen className="size-[20px]" />
                 </button>
 
-                <button
-                  type="button"
-                  className="text-btn-2 hover:opacity-70 transition-all"
-                >
-                  <Trash2 className="size-[20px]" />
-                </button>
+                <DeleteButton />
               </span>
             </li>
           ))}
