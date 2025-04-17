@@ -10,7 +10,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: "amir-taheri-web/shelfmaster-front:latest"
+  IMAGE_NAME: "amir-taheri-web/shelfmaster-front"
 
 jobs:
   build-and-push:
