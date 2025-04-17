@@ -1,0 +1,14 @@
+services:
+  ShelfMaster_front_app_stage:
+    image: ghcr.io/amir-taheri-web/shelfmaster-front:latest
+    container_name: ShelfMaster_front_stage
+    restart: always
+    pull_policy: always # ⬅️ Ensures it always pulls the latest image
+    ports:
+      - "3000:3000"
+    networks:
+      - ShelfMaster-front-stage
+
+networks:
+  ShelfMaster-front-stage:
+    external: true
