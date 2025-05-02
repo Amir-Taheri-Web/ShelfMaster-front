@@ -14,7 +14,7 @@
   --color-back-1: #f7f7f8;
   --color-back-2: #ffffff;
   --color-back-3: #f2f2f2;
-  --color-back-4: #3333337D;
+  --color-back-4: #3333337d;
 
   --color-line-1: #e4e4e4;
   --color-line-2: #8d8d8d80;
@@ -26,7 +26,7 @@
   --color-txt-4: #3a8bed;
   --color-txt-5: #8d8d8d80;
   --color-txt-6: #00000099;
-  --color-txt-7: #8D8D8D;
+  --color-txt-7: #8d8d8d;
 
   --color-icon-1: #292d32;
 
@@ -135,7 +135,7 @@
 }
 
 @utility modal-input-wrapper {
-  @apply flex flex-col gap-2
+  @apply flex flex-col gap-2;
 }
 
 @utility modal-input-label {
@@ -144,4 +144,12 @@
 
 @utility modal-input {
   @apply bg-back-3 rounded-lg py-3 px-2 w-full text-sm text-txt-1 font-light placeholder:text-txt-7;
+}
+
+@utility error-wrapper {
+  @apply flex flex-col gap-2;
+}
+
+@utility error-message {
+  @apply text-sm max-sm:text-xs max-sm:min-h-[20px] text-btn-2 min-h-[25px] w-[25rem] max-sm:w-full max-h-[50px] leading-6;
 }
