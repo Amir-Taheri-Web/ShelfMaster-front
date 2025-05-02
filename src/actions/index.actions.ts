@@ -3,6 +3,7 @@
 import { passwordValidation } from "@/utils/validation";
 import DOMPurify from "isomorphic-dompurify";
 import { cookies } from "next/headers";
+import { redirect, RedirectType } from "next/navigation";
 
 const registerAction = async (
   prevState: { label: string; message: string },
@@ -125,4 +126,9 @@ const loginAction = async (
   }
 };
 
-export { registerAction, loginAction };
+const logoutAction = async () => {
+  (await cookies()).delete("token");
+  redirect("/", "replace" as RedirectType);
+};
+
+export { registerAction, loginAction, logoutAction };
