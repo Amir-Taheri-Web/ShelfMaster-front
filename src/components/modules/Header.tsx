@@ -35,7 +35,7 @@ const Header: FC<THeaderProps> = ({ username }) => {
             <span className="text-txt-1 font-medium max-md:text-sm overflow-x-hidden whitespace-nowrap text-ellipsis max-xm:w-[100px]! max-xs:w-[50px]! no-scrollbar">
               {username}
             </span>
-            <span className="text-sm text-txt-1 max-md:text-xs">مدیر</span>
+            <span className="text-sm text-txt-1 max-md:text-xs">ادمین</span>
           </span>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-back-2 border border-line-1 rounded-xl shadow-md p-0 hover:bg-back-1 transition-all">
