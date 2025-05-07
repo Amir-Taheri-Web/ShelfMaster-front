@@ -110,9 +110,20 @@ const loginAction = async (
     if (!result.token)
       return { label: "error", message: "نام کاربری یا رمز عبور اشتباه است" };
 
-    (await cookies()).set({
+    const cookieStore = await cookies();
+
+    cookieStore.set({
       name: "token",
       value: result.token,
+      httpOnly: false,
+      secure: true,
+      sameSite: "strict",
+      path: "/",
+    });
+
+    cookieStore.set({
+      name: "username",
+      value: username,
       httpOnly: false,
       secure: true,
       sameSite: "strict",

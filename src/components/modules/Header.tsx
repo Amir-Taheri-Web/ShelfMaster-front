@@ -10,8 +10,10 @@ import {
 } from "@/ui/dropdown-menu";
 import { LogOut } from "lucide-react";
 import { logoutAction } from "@/actions/index.actions";
+import { FC } from "react";
+import { THeaderProps } from "@/types/index.types";
 
-const Header = () => {
+const Header: FC<THeaderProps> = ({ username }) => {
   return (
     <header className="bg-back-2 border border-line-1 flex items-center gap-4 rounded-2xl py-3 px-8 max-md:py-2 max-md:px-6">
       <SearchBar />
@@ -31,7 +33,7 @@ const Header = () => {
 
           <span className="flex flex-col w-full items-start">
             <span className="text-txt-1 font-medium max-md:text-sm overflow-x-hidden whitespace-nowrap text-ellipsis max-xm:w-[100px]! max-xs:w-[50px]! no-scrollbar">
-              امیر طاهری
+              {username}
             </span>
             <span className="text-sm text-txt-1 max-md:text-xs">مدیر</span>
           </span>

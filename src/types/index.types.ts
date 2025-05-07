@@ -37,8 +37,13 @@ export type TBooks = {
 
 export type THomePageProps = {
   booksData: TBooksData;
+  username: string;
 };
 
 export type TBookListProps = {
   books: TBooks;
+};
+
+export type THeaderProps = {
+  username: string;
 };

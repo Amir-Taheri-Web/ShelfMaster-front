@@ -6,9 +6,12 @@ import { redirect } from "next/navigation";
 export const revalidate = 0;
 
 const Home = async () => {
-  const token: string | undefined = (await cookies()).get("token")?.value;
+  const cookieStore = await cookies();
+  const token: string | undefined = cookieStore.get("token")?.value;
 
   if (!token) redirect("/login");
+
+  const username = cookieStore.get("username")?.value || "کاربر";
 
   const res: Response = await fetch(`${process.env.BASE_URL}/book`);
 
@@ -16,7 +19,7 @@ const Home = async () => {
 
   const booksData: TBooksData = await res.json();
 
-  return <HomePage booksData={booksData} />;
+  return <HomePage booksData={booksData} username={username} />;
 };
 
 export default Home;
