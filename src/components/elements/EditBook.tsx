@@ -27,6 +27,7 @@ const EditBook = () => {
               <input
                 type="text"
                 id="title"
+                name="title"
                 placeholder="نام کتاب"
                 className="modal-input"
               />
@@ -39,6 +40,7 @@ const EditBook = () => {
               <input
                 type="text"
                 id="author"
+                name="author"
                 placeholder="نام نویسنده"
                 className="modal-input"
               />
@@ -50,8 +52,9 @@ const EditBook = () => {
               </label>
               <textarea
                 id="summery"
+                name="summery"
                 placeholder="خلاصه"
-                className="modal-input resize-none h-[100px]"
+                className="modal-input resize-none h-[100px] outline-none! leading-7"
               />
             </div>
 
@@ -63,6 +66,7 @@ const EditBook = () => {
                 <input
                   type="text"
                   id="quantity"
+                  name="quantity"
                   placeholder="تعداد"
                   className="modal-input"
                 />
@@ -75,6 +79,7 @@ const EditBook = () => {
                 <input
                   type="text"
                   id="price"
+                  name="price"
                   placeholder="قیمت"
                   className="modal-input"
                 />

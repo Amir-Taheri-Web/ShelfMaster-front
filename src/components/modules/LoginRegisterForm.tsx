@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FC, useActionState, useEffect } from "react";
 import logo from "@/public/images/logo.png";
 import Link from "next/link";
-import { loginAction, registerAction } from "@/actions/index.actions";
+import { loginAction, registerAction } from "@/actions/auth.actions";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,6 @@ const LoginRegisterForm: FC<TLoginRegisterForm> = ({ isLogin }) => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(message);
     if (message.label && message.label === "success") {
       toast.success(message.message);
 

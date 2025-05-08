@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 import { LogOut } from "lucide-react";
-import { logoutAction } from "@/actions/index.actions";
+import { logoutAction } from "@/actions/auth.actions";
 import { FC } from "react";
 import { THeaderProps } from "@/types/index.types";
 

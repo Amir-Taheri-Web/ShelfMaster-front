@@ -1,3 +1,7 @@
+"use client";
+
+import { addBookAction } from "@/actions/forms.actions";
+import { cn } from "@/lib/utils";
 import {
   Dialog,
   DialogClose,
@@ -5,12 +9,38 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/ui/dialog";
+import { useActionState, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const AddBook = () => {
+  const [message, formAction, isPending] = useActionState(addBookAction, {
+    label: "",
+    message: "",
+  });
+
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    if (message.label && message.label === "success") {
+      toast.success(message.message);
+      setIsDialogOpen(false);
+    }
+
+    if (message.label && message.label === "error")
+      toast.error(message.message);
+  }, [message]);
+
   return (
     <div>
-      <Dialog>
-        <DialogTrigger className="text-txt-3 bg-btn-1 rounded-xl font-medium px-8 py-3 max-md:px-6 max-sm:px-4 max-sm:rounded-lg max-sm:text-sm hover:opacity-70 transition-all">
+      <Dialog open={isDialogOpen}>
+        <DialogTrigger
+          onClick={() => {
+            if (isDialogOpen === false) setIsDialogOpen(undefined);
+          }}
+          className="text-txt-3 bg-btn-1 rounded-xl font-medium px-8 py-3 max-md:px-6 max-sm:px-4 max-sm:rounded-lg max-sm:text-sm hover:opacity-70 transition-all"
+        >
           افزودن کتاب
         </DialogTrigger>
         <DialogContent className="max-sm:rounded-3xl! max-h-[calc(100vh-4rem)] overflow-y-auto">
@@ -18,7 +48,12 @@ const AddBook = () => {
             ایجاد کتاب جدید
           </DialogTitle>
 
-          <form className="mt-4 flex flex-col gap-6 p-3 max-xm:p-0">
+          <form
+            className={cn("mt-4 flex flex-col gap-6 p-3 max-xm:p-0", {
+              "pointer-events-none opacity-50": isPending,
+            })}
+            action={formAction}
+          >
             <div className="modal-input-wrapper">
               <label htmlFor="title" className="modal-input-label">
                 نام کتاب
@@ -26,6 +61,7 @@ const AddBook = () => {
               <input
                 type="text"
                 id="title"
+                name="title"
                 placeholder="نام کتاب"
                 className="modal-input"
               />
@@ -38,6 +74,7 @@ const AddBook = () => {
               <input
                 type="text"
                 id="author"
+                name="author"
                 placeholder="نام نویسنده"
                 className="modal-input"
               />
@@ -49,8 +86,9 @@ const AddBook = () => {
               </label>
               <textarea
                 id="summery"
+                name="summery"
                 placeholder="خلاصه"
-                className="modal-input resize-none h-[100px]"
+                className="modal-input resize-none h-[100px] outline-none! leading-7"
               />
             </div>
 
@@ -62,6 +100,7 @@ const AddBook = () => {
                 <input
                   type="text"
                   id="quantity"
+                  name="quantity"
                   placeholder="تعداد"
                   className="modal-input"
                 />
@@ -74,6 +113,7 @@ const AddBook = () => {
                 <input
                   type="text"
                   id="price"
+                  name="price"
                   placeholder="قیمت"
                   className="modal-input"
                 />
