@@ -4,6 +4,7 @@ import { priceValidation, quantityValidation } from "@/utils/validation";
 import DOMPurify from "isomorphic-dompurify";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
+
 const addBookAction = async (
   prevState: { label: string; message: string },
   formData: FormData
@@ -63,4 +64,35 @@ const addBookAction = async (
   }
 };
 
-export { addBookAction };
+const deleteBookAction = async (prevState: {
+  label: string;
+  message: string;
+  bookId: string;
+}) => {
+  const token: string = (await cookies()).get("token")?.value || "";
+
+  try {
+    const res: Response = await fetch(
+      `${process.env.BASE_URL}/book/${prevState.bookId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `BearerAuth ${token}`,
+        },
+      }
+    );
+    await res.json();
+
+    revalidatePath("/");
+    return { bookId: "", label: "success", message: "کتاب حذف شد" };
+  } catch (error) {
+    return {
+      ...prevState,
+      label: "error",
+      message: "مشکلی در حذف کتاب پیش آمده. لطفا دوباره امتحان کنید",
+    };
+  }
+};
+
+export { addBookAction, deleteBookAction };

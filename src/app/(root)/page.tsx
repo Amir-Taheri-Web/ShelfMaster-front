@@ -15,8 +15,6 @@ const Home = async () => {
 
   const res: Response = await fetch(`${process.env.BASE_URL}/book`);
 
-  if (!res.ok) throw new Error("مشکلی پیش آمده. دوباره امتحان کنید");
-
   const booksData: TBooksData = await res.json();
 
   return <HomePage booksData={booksData} username={username} />;

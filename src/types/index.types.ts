@@ -47,3 +47,7 @@ export type TBookListProps = {
 export type THeaderProps = {
   username: string;
 };
+
+export type TDeleteBookProps = {
+  bookId: string;
+};

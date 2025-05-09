@@ -138,7 +138,9 @@ const loginAction = async (
 };
 
 const logoutAction = async () => {
-  (await cookies()).delete("token");
+  const cookieStore = await cookies();
+  cookieStore.delete("token");
+  cookieStore.delete("username");
   redirect("/", "replace" as RedirectType);
 };
 

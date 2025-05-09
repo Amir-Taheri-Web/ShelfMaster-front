@@ -1,3 +1,5 @@
+"use client";
+
 import { Trash2 } from "lucide-react";
 import {
   Dialog,
@@ -8,15 +10,51 @@ import {
 } from "@/ui/dialog";
 import Image from "next/image";
 import deleteImage from "@/public/images/delete.png";
+import { FC, useActionState, useEffect, useState } from "react";
+import { TDeleteBookProps } from "@/types/index.types";
+import { deleteBookAction } from "@/actions/forms.actions";
+import toast from "react-hot-toast";
+import { cn } from "@/lib/utils";
 
-const DeleteBook = () => {
+const DeleteBook: FC<TDeleteBookProps> = ({ bookId }) => {
+  const [message, formAction, isPending] = useActionState(deleteBookAction, {
+    label: "",
+    message: "",
+    bookId: bookId,
+  });
+
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean | undefined>(
+    undefined
+  );
+
+  console.log(bookId);
+
+  useEffect(() => {
+    if (message.label && message.label === "success") {
+      toast.success(message.message);
+      setIsDialogOpen(false);
+    }
+
+    if (message.label && message.label === "error")
+      toast.error(message.message);
+  }, [message]);
+
   return (
     <div>
-      <Dialog>
-        <DialogTrigger className="text-btn-2 hover:opacity-70 transition-all">
+      <Dialog open={isDialogOpen}>
+        <DialogTrigger
+          onClick={() => {
+            if (isDialogOpen === false) setIsDialogOpen(undefined);
+          }}
+          className="text-btn-2 hover:opacity-70 transition-all"
+        >
           <Trash2 className="size-[20px]" />
         </DialogTrigger>
-        <DialogContent className="flex flex-col gap-8 items-center">
+        <DialogContent
+          className={cn("flex flex-col gap-8 items-center", {
+            "pointer-events-none! opacity-70": isPending,
+          })}
+        >
           <Image
             src={deleteImage}
             alt="delete icon"
@@ -31,8 +69,17 @@ const DeleteBook = () => {
           </DialogTitle>
 
           <div className="flex items-center gap-4 max-xs:flex-col max-xs:w-full">
-            <DialogClose className="font-medium bg-btn-2 text-txt-3 px-16 py-2 rounded-xl w-full hover:opacity-70 transition-all">حذف</DialogClose>
-            <DialogClose className="font-medium bg-btn-5 text-txt-1 px-16 py-2 rounded-xl w-full hover:opacity-70 transition-all">لغو</DialogClose>
+            <form action={formAction}>
+              <button
+                type="submit"
+                className="font-medium bg-btn-2 text-txt-3 px-16 py-2 rounded-xl w-full hover:opacity-70 transition-all"
+              >
+                حذف
+              </button>
+            </form>
+            <DialogClose className="font-medium bg-btn-5 text-txt-1 px-16 py-2 rounded-xl w-full hover:opacity-70 transition-all">
+              لغو
+            </DialogClose>
           </div>
         </DialogContent>
       </Dialog>

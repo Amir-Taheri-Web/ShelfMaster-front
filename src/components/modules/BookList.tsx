@@ -16,8 +16,8 @@ const BookList: FC<TBookListProps> = ({ books }) => {
         </li>
 
         <div className="bg-back-2 rounded-b-4xl max-sm:rounded-b-2xl grow h-[500px] max-md:h-[300px] overflow-y-auto">
-          {books.length > 0 &&
-            books.map((item, index) => (
+          {books && books.length > 0 &&
+            books?.map((item, index) => (
               <li
                 key={index}
                 className="flex items-center justify-between text-sm px-16 py-6 max-sm:py-5 max-sm:px-12 border-b border-b-line-3 gap-8"
@@ -31,12 +31,16 @@ const BookList: FC<TBookListProps> = ({ books }) => {
                 <span className="flex items-center gap-4 w-[56px]">
                   <EditBook />
 
-                  <DeleteBook />
+                  <DeleteBook bookId={item.id} />
                 </span>
               </li>
             ))}
 
-          {books.length === 0 && <p className="text-2xl px-16 py-6 max-sm:py-5 max-sm:px-12 text-txt-7 max-sm:text-xl">کتابی برای نمایش وجود ندارد</p>}
+          {(!books || books.length === 0) && (
+            <p className="text-2xl px-16 py-6 max-sm:py-5 max-sm:px-12 text-txt-7 max-sm:text-xl">
+              کتابی برای نمایش وجود ندارد
+            </p>
+          )}
         </div>
       </ul>
     </div>
