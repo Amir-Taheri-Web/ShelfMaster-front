@@ -16,7 +16,8 @@ const BookList: FC<TBookListProps> = ({ books }) => {
         </li>
 
         <div className="bg-back-2 rounded-b-4xl max-sm:rounded-b-2xl grow h-[500px] max-md:h-[300px] overflow-y-auto">
-          {books && books.length > 0 &&
+          {books &&
+            books.length > 0 &&
             books?.map((item, index) => (
               <li
                 key={index}
@@ -29,7 +30,7 @@ const BookList: FC<TBookListProps> = ({ books }) => {
                 <span className="w-[100px]">{e2p(item.price)} هزار تومان</span>
                 <span className="w-[150px]">{item.id}</span>
                 <span className="flex items-center gap-4 w-[56px]">
-                  <EditBook />
+                  <EditBook bookId={item.id} />
 
                   <DeleteBook bookId={item.id} />
                 </span>

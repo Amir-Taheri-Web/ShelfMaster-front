@@ -27,8 +27,6 @@ const DeleteBook: FC<TDeleteBookProps> = ({ bookId }) => {
     undefined
   );
 
-  console.log(bookId);
-
   useEffect(() => {
     if (message.label && message.label === "success") {
       toast.success(message.message);

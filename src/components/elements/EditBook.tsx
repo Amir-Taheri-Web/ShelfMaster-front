@@ -1,3 +1,7 @@
+"use client";
+
+import { cn } from "@/lib/utils";
+import { TBook, TEditBookProps } from "@/types/index.types";
 import {
   Dialog,
   DialogClose,
@@ -6,8 +10,31 @@ import {
   DialogTrigger,
 } from "@/ui/dialog";
 import { SquarePen } from "lucide-react";
+import { FC, useEffect, useState } from "react";
 
-const EditBook = () => {
+const EditBook: FC<TEditBookProps> = ({ bookId }) => {
+  const [book, setBook] = useState<TBook | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const fetchBook = async (): Promise<void> => {
+    try {
+      const res: Response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/book/${bookId}`
+      );
+      const data: any = await res.json();
+      console.log(data);
+
+      setBook(data);
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBook();
+  }, []);
+
   return (
     <div>
       <Dialog>
@@ -19,15 +46,22 @@ const EditBook = () => {
             ویرایش اطلاعات کتاب
           </DialogTitle>
 
-          <form className="mt-4 flex flex-col gap-6 p-3 max-xm:p-0">
+          <form
+            className={cn("mt-4 flex flex-col gap-6 p-3 max-xm:p-0", {
+              "pointer-events-none! opacity-50": isLoading,
+            })}
+          >
             <div className="modal-input-wrapper">
               <label htmlFor="title" className="modal-input-label">
                 نام کتاب
               </label>
+              <input type="text" autoFocus className="size-0" />
               <input
                 type="text"
                 id="title"
                 name="title"
+                defaultValue={book?.title || ""}
+                disabled={isLoading}
                 placeholder="نام کتاب"
                 className="modal-input"
               />
@@ -41,6 +75,8 @@ const EditBook = () => {
                 type="text"
                 id="author"
                 name="author"
+                defaultValue={book?.author || ""}
+                disabled={isLoading}
                 placeholder="نام نویسنده"
                 className="modal-input"
               />
@@ -53,6 +89,8 @@ const EditBook = () => {
               <textarea
                 id="summery"
                 name="summery"
+                defaultValue={book?.summary}
+                disabled={isLoading}
                 placeholder="خلاصه"
                 className="modal-input resize-none h-[100px] outline-none! leading-7"
               />
@@ -67,6 +105,8 @@ const EditBook = () => {
                   type="text"
                   id="quantity"
                   name="quantity"
+                  defaultValue={book?.quantity || ""}
+                  disabled={isLoading}
                   placeholder="تعداد"
                   className="modal-input"
                 />
@@ -80,6 +120,8 @@ const EditBook = () => {
                   type="text"
                   id="price"
                   name="price"
+                  defaultValue={book?.price || ""}
+                  disabled={isLoading}
                   placeholder="قیمت"
                   className="modal-input"
                 />

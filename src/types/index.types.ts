@@ -26,14 +26,16 @@ export type TBooksData = {
   }[];
 };
 
-export type TBooks = {
+export type TBook = {
   id: string;
   title: string;
-  summary: string;
+  summary?: string;
   author: string;
   price: number;
   quantity: number;
-}[];
+};
+
+export type TBooks = TBook[];
 
 export type THomePageProps = {
   booksData: TBooksData;
@@ -49,5 +51,9 @@ export type THeaderProps = {
 };
 
 export type TDeleteBookProps = {
+  bookId: string;
+};
+
+export type TEditBookProps = {
   bookId: string;
 };
