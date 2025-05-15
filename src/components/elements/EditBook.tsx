@@ -1,5 +1,6 @@
 "use client";
 
+import { editBookAction } from "@/actions/forms.actions";
 import { cn } from "@/lib/utils";
 import { TBook, TEditBookProps } from "@/types/index.types";
 import {
@@ -10,11 +11,20 @@ import {
   DialogTrigger,
 } from "@/ui/dialog";
 import { SquarePen } from "lucide-react";
-import { FC, useEffect, useState } from "react";
+import { FC, useActionState, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const EditBook: FC<TEditBookProps> = ({ bookId }) => {
   const [book, setBook] = useState<TBook | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [message, formAction, isPending] = useActionState(editBookAction, {
+    bookId,
+    label: "",
+    message: "",
+  });
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean | undefined>(
+    undefined
+  );
 
   const fetchBook = async (): Promise<void> => {
     try {
@@ -35,11 +45,26 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
     fetchBook();
   }, []);
 
+  useEffect(() => {
+    if (message.label && message.label === "success") {
+      toast.success(message.message);
+      setIsDialogOpen(false);
+    }
+
+    if (message.label && message.label === "error")
+      toast.error(message.message);
+  }, [message]);
+
   return (
     <div>
-      <Dialog>
-        <DialogTrigger className="text-btn-3 hover:opacity-70 transition-all">
-          <SquarePen className="size-[20px]" />{" "}
+      <Dialog open={isDialogOpen}>
+        <DialogTrigger
+          onClick={() => {
+            if (isDialogOpen === false) setIsDialogOpen(undefined);
+          }}
+          className="text-btn-3 hover:opacity-70 transition-all"
+        >
+          <SquarePen className="size-[20px]" />
         </DialogTrigger>
         <DialogContent className="max-sm:rounded-3xl! max-h-[calc(100vh-4rem)] overflow-y-auto">
           <DialogTitle className="mx-auto text-center font-medium text-xl text-txt-1 mt-4">
@@ -48,8 +73,9 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
 
           <form
             className={cn("mt-4 flex flex-col gap-6 p-3 max-xm:p-0", {
-              "pointer-events-none! opacity-50": isLoading,
+              "pointer-events-none! opacity-50": isLoading || isPending,
             })}
+            action={formAction}
           >
             <div className="modal-input-wrapper">
               <label htmlFor="title" className="modal-input-label">
@@ -61,7 +87,7 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
                 id="title"
                 name="title"
                 defaultValue={book?.title || ""}
-                disabled={isLoading}
+                disabled={isLoading || isPending}
                 placeholder="نام کتاب"
                 className="modal-input"
               />
@@ -76,21 +102,21 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
                 id="author"
                 name="author"
                 defaultValue={book?.author || ""}
-                disabled={isLoading}
+                disabled={isLoading || isPending}
                 placeholder="نام نویسنده"
                 className="modal-input"
               />
             </div>
 
             <div className="modal-input-wrapper">
-              <label htmlFor="summery" className="modal-input-label">
+              <label htmlFor="summary" className="modal-input-label">
                 خلاصه
               </label>
               <textarea
-                id="summery"
-                name="summery"
+                id="summary"
+                name="summary"
                 defaultValue={book?.summary}
-                disabled={isLoading}
+                disabled={isLoading || isPending}
                 placeholder="خلاصه"
                 className="modal-input resize-none h-[100px] outline-none! leading-7"
               />
@@ -106,7 +132,7 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
                   id="quantity"
                   name="quantity"
                   defaultValue={book?.quantity || ""}
-                  disabled={isLoading}
+                  disabled={isLoading || isPending}
                   placeholder="تعداد"
                   className="modal-input"
                 />
@@ -121,7 +147,7 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
                   id="price"
                   name="price"
                   defaultValue={book?.price || ""}
-                  disabled={isLoading}
+                  disabled={isLoading || isPending}
                   placeholder="قیمت"
                   className="modal-input"
                 />

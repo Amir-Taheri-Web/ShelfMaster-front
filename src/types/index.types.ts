@@ -29,7 +29,7 @@ export type TBooksData = {
 export type TBook = {
   id: string;
   title: string;
-  summary?: string;
+  summary: string;
   author: string;
   price: number;
   quantity: number;

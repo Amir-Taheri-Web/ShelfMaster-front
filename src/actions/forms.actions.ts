@@ -9,10 +9,10 @@ const addBookAction = async (
   prevState: { label: string; message: string },
   formData: FormData
 ) => {
-  const { title, author, summery, quantity, price } = {
+  const { title, author, summary, quantity, price } = {
     title: DOMPurify.sanitize(formData.get("title") as string).trim(),
     author: DOMPurify.sanitize(formData.get("author") as string).trim(),
-    summery: DOMPurify.sanitize(formData.get("summery") as string).trim(),
+    summary: DOMPurify.sanitize(formData.get("summary") as string).trim(),
     quantity: DOMPurify.sanitize(formData.get("quantity") as string).trim(),
     price: DOMPurify.sanitize(formData.get("price") as string).trim(),
   };
@@ -26,7 +26,7 @@ const addBookAction = async (
       message: "نام نویسنده باید بین ۳ تا ۳۰ کاراکتر باشد",
     };
 
-  if (!summery || summery.length < 10 || summery.length > 500)
+  if (!summary || summary.length < 10 || summary.length > 500)
     return { label: "error", message: "خلاصه باید بین ۱۰ تا ۵۰۰ کاراکتر باشد" };
 
   if (!quantityValidation(p2e(quantity)))
@@ -40,11 +40,17 @@ const addBookAction = async (
 
   const token: string = (await cookies()).get("token")?.value || "";
 
-  if (!token) return { label: "error", message: "" };
+  if (!token) return { label: "error", message: "لطفا دوباره وارد شوید" };
 
   try {
     const res: Response = await fetch(`${process.env.BASE_URL}/book`, {
-      body: JSON.stringify({ title, author, summery, quantity, price }),
+      body: JSON.stringify({
+        title,
+        author,
+        summary,
+        quantity: Number(quantity),
+        price: Number(price),
+      }),
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -60,6 +66,90 @@ const addBookAction = async (
     return {
       label: "error",
       message: "مشکلی در افزودن کتاب پیش آمده. دوباره امتحان کنید",
+    };
+  }
+};
+
+const editBookAction = async (
+  prevState: { bookId: string; label: string; message: string },
+  formData: FormData
+) => {
+  const { title, author, summary, quantity, price } = {
+    title: DOMPurify.sanitize(formData.get("title") as string).trim(),
+    author: DOMPurify.sanitize(formData.get("author") as string).trim(),
+    summary: DOMPurify.sanitize(formData.get("summary") as string).trim(),
+    quantity: DOMPurify.sanitize(formData.get("quantity") as string).trim(),
+    price: DOMPurify.sanitize(formData.get("price") as string).trim(),
+  };
+
+  if (!title || title.length < 3 || title.length > 50)
+    return {
+      ...prevState,
+      label: "error",
+      message: "عنوان باید بین ۳ تا ۵۰ کاراکتر باشد",
+    };
+
+  if (!author || author.length < 3 || author.length > 30)
+    return {
+      ...prevState,
+      label: "error",
+      message: "نام نویسنده باید بین ۳ تا ۳۰ کاراکتر باشد",
+    };
+
+  if (!summary || summary.length < 10 || summary.length > 500)
+    return {
+      ...prevState,
+      label: "error",
+      message: "خلاصه باید بین ۱۰ تا ۵۰۰ کاراکتر باشد",
+    };
+
+  if (!quantityValidation(p2e(quantity)))
+    return {
+      ...prevState,
+      label: "error",
+      message: "تعداد باید عدد و بین ۱ تا ۳۰۰ باشد",
+    };
+
+  if (!priceValidation(p2e(price)))
+    return {
+      ...prevState,
+      label: "error",
+      message: "قیمت محصول باید عدد و بین ۱۰۰۰ تومان تا ۱۰۰ میلیون تومان باشد",
+    };
+
+  const token: string = (await cookies()).get("token")?.value || "";
+
+  if (!token)
+    return { ...prevState, label: "error", message: "لطفا دوباره وارد شوید" };
+
+  try {
+    const res: Response = await fetch(
+      `${process.env.BASE_URL}/book/${prevState.bookId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          title,
+          author,
+          summary,
+          quantity: Number(quantity),
+          price: Number(price),
+        }),
+        headers: {
+          "content-type": "application/json",
+          Authorization: `BearerAuth ${token}`,
+        },
+      }
+    );
+
+    await res.json();
+
+    revalidatePath("/");
+    return { bookId: "", label: "success", message: "کتاب بروزرسانی شد" };
+  } catch (error) {
+    return {
+      ...prevState,
+      label: "error",
+      message: "مشکلی در بروزرسانی کتاب پیش آمده. دوباره امتحان کنید",
     };
   }
 };
@@ -95,4 +185,4 @@ const deleteBookAction = async (prevState: {
   }
 };
 
-export { addBookAction, deleteBookAction };
+export { addBookAction, deleteBookAction, editBookAction };

@@ -81,12 +81,12 @@ const AddBook = () => {
             </div>
 
             <div className="modal-input-wrapper">
-              <label htmlFor="summery" className="modal-input-label">
+              <label htmlFor="summary" className="modal-input-label">
                 خلاصه
               </label>
               <textarea
-                id="summery"
-                name="summery"
+                id="summary"
+                name="summary"
                 placeholder="خلاصه"
                 className="modal-input resize-none h-[100px] outline-none! leading-7"
               />

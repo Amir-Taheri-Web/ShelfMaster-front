@@ -1,7 +1,7 @@
 import DeleteBook from "@/elements/DeleteBook";
 import EditBook from "@/elements/EditBook";
 import { TBookListProps } from "@/types/index.types";
-import { e2p } from "@/utils/convert";
+import { e2p, sp } from "@/utils/convert";
 import { FC } from "react";
 const BookList: FC<TBookListProps> = ({ books }) => {
   return (
@@ -27,7 +27,7 @@ const BookList: FC<TBookListProps> = ({ books }) => {
                   {e2p(item.title)}
                 </span>
                 <span className="w-[52px]">{e2p(item.quantity)}</span>
-                <span className="w-[100px]">{e2p(item.price)} هزار تومان</span>
+                <span className="w-[100px]">{sp(item.price)} تومان</span>
                 <span className="w-[150px]">{item.id}</span>
                 <span className="flex items-center gap-4 w-[56px]">
                   <EditBook bookId={item.id} />
