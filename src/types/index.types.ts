@@ -40,6 +40,7 @@ export type TBooks = TBook[];
 export type THomePageProps = {
   booksData: TBooksData;
   username: string;
+  searchQuery: string | string[];
 };
 
 export type TBookListProps = {
@@ -48,6 +49,7 @@ export type TBookListProps = {
 
 export type THeaderProps = {
   username: string;
+  searchQuery: string | string[];
 };
 
 export type TDeleteBookProps = {
@@ -56,4 +58,12 @@ export type TDeleteBookProps = {
 
 export type TEditBookProps = {
   bookId: string;
+};
+
+export type THomeProps = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export type TSearchBarProps = {
+  searchQuery: string | string[];
 };

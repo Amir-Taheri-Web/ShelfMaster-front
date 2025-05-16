@@ -1,12 +1,21 @@
-import { Search } from "lucide-react";
+import SearchButton from "@/elements/SearchButton";
+import { TSearchBarProps } from "@/types/index.types";
+import Form from "next/form";
+import { FC } from "react";
 
-const SearchBar = () => {
+const SearchBar: FC<TSearchBarProps> = async ({ searchQuery }) => {
   return (
-    <div className="flex items-center gap-3 max-sm:gap-1 sm:grow">
-      <Search className="size-6 text-txt-1 max-sm:size-[20px]" />
+    <Form action="/" className="flex items-center gap-3 max-sm:gap-1 sm:grow">
+      <SearchButton />
 
-      <input type="text" placeholder="جستجو کتاب" className="placeholder:text-txt-6 w-full max-xm:w-[130px]! text-txt-1" />
-    </div>
+      <input
+        type="text"
+        name="search"
+        defaultValue={searchQuery}
+        placeholder="جستجو کتاب"
+        className="placeholder:text-txt-6 w-full max-xm:w-[130px]! text-txt-1"
+      />
+    </Form>
   );
 };
 
