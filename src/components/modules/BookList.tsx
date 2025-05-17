@@ -1,3 +1,4 @@
+import BookInfo from "@/elements/BookInfo";
 import DeleteBook from "@/elements/DeleteBook";
 import EditBook from "@/elements/EditBook";
 import { TBookListProps } from "@/types/index.types";
@@ -12,7 +13,7 @@ const BookList: FC<TBookListProps> = ({ books }) => {
           <span className="w-[52px]">موجودی</span>
           <span className="w-[100px]">قیمت</span>
           <span className="w-[150px]">شناسه کتاب</span>
-          <span className="w-[56px]"></span>
+          <span className="w-[92px]"></span>
         </li>
 
         <div className="bg-back-2 rounded-b-4xl max-sm:rounded-b-2xl grow h-[500px] max-md:h-[300px] overflow-y-auto">
@@ -29,7 +30,9 @@ const BookList: FC<TBookListProps> = ({ books }) => {
                 <span className="w-[52px]">{e2p(item.quantity)}</span>
                 <span className="w-[100px]">{sp(item.price)} تومان</span>
                 <span className="w-[150px]">{item.id}</span>
-                <span className="flex items-center gap-4 w-[56px]">
+                <span className="flex items-center gap-4 w-[92px]">
+                  <BookInfo bookId={item.id} />
+
                   <EditBook bookId={item.id} />
 
                   <DeleteBook bookId={item.id} />

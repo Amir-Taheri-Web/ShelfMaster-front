@@ -67,3 +67,7 @@ export type THomeProps = {
 export type TSearchBarProps = {
   searchQuery: string | string[];
 };
+
+export type TBookInfoProps = {
+  bookId: string;
+};

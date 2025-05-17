@@ -26,8 +26,8 @@ const addBookAction = async (
       message: "نام نویسنده باید بین ۳ تا ۳۰ کاراکتر باشد",
     };
 
-  if (!summary || summary.length < 10 || summary.length > 500)
-    return { label: "error", message: "خلاصه باید بین ۱۰ تا ۵۰۰ کاراکتر باشد" };
+  if (!summary || summary.length < 10 || summary.length > 2000)
+    return { label: "error", message: "خلاصه باید بین ۱۰ تا ۲۰۰۰ کاراکتر باشد" };
 
   if (!quantityValidation(p2e(quantity)))
     return { label: "error", message: "تعداد باید عدد و بین ۱ تا ۳۰۰ باشد" };
@@ -96,11 +96,11 @@ const editBookAction = async (
       message: "نام نویسنده باید بین ۳ تا ۳۰ کاراکتر باشد",
     };
 
-  if (!summary || summary.length < 10 || summary.length > 500)
+  if (!summary || summary.length < 10 || summary.length > 2000)
     return {
       ...prevState,
       label: "error",
-      message: "خلاصه باید بین ۱۰ تا ۵۰۰ کاراکتر باشد",
+      message: "خلاصه باید بین ۱۰ تا ۲۰۰۰ کاراکتر باشد",
     };
 
   if (!quantityValidation(p2e(quantity)))
