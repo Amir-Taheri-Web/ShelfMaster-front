@@ -60,23 +60,23 @@ const BookInfo: FC<TBookInfoProps> = ({ bookId }) => {
               </DialogTitle>
 
               <div className="flex flex-col gap-8 max-sm:text-sm">
-                <div className="flex gap-1 flex-wrap border-x-2 border-line-2 border-dashed px-2">
+                <div className="flex gap-1 flex-wrap">
                   <span className="font-medium">نویسنده:</span>
                   <span>{e2p(book.author)}</span>
                 </div>
 
-                <div className="flex flex-col gap-2 border-x-2 border-line-2 border-dashed px-2">
+                <div className="flex flex-col gap-2">
                   <span className="font-medium">خلاصه:</span>
-                  <p className="leading-8">{e2p(book.summary)}</p>
+                  <p className="leading-8 text-justify">{e2p(book.summary)}</p>
                 </div>
 
                 <div className="flex items-center flex-wrap justify-between gap-4 mb-4 mt-8">
-                  <div className="flex gap-1 border-x-2 border-line-2 border-dashed px-2">
+                  <div className="flex gap-1 border-x-2 border-btn-1 border-dashed px-2">
                     <span className="font-medium">قیمت:</span>
                     <span>{sp(book.price.toString())} تومان</span>
                   </div>
 
-                  <div className="flex gap-1 border-x-2 border-line-2 border-dashed px-2">
+                  <div className="flex gap-1 border-x-2 border-btn-1 border-dashed px-2">
                     <span className="font-medium">موجودی:</span>
                     <span>{sp(book.quantity.toString())} عدد</span>
                   </div>
