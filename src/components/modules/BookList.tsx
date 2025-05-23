@@ -42,7 +42,7 @@ const BookList: FC<TBookListProps> = ({ books }) => {
                     </DialogContent>
                   </Dialog>
 
-                  {/* <EditBook bookId={item.id} /> */}
+                  <EditBook bookId={item.id} />
 
                   <DeleteBook bookId={item.id} />
                 </span>

@@ -41,16 +41,16 @@ const BookInfo: FC<TBookInfoProps> = ({ bookId }) => {
       </DialogClose>
       {isLoading && (
         <div className="min-h-[400px] flex flex-col gap-12 items-center mt-8">
-          <Skeleton className="w-[180px] h-[40px] rounded-xl bg-btn-5" />
+          <Skeleton className="w-[180px] h-[40px] rounded-xl bg-back-3" />
 
           <div className="flex flex-col gap-4 w-full">
-            <Skeleton className="w-[230px] h-[20px] rounded-md bg-btn-5" />
-            <Skeleton className="w-full h-[200px] rounded-xl bg-btn-5" />
+            <Skeleton className="w-[230px] h-[20px] rounded-md bg-back-3" />
+            <Skeleton className="w-full h-[200px] rounded-xl bg-back-3" />
           </div>
 
           <div className="flex gap-4 items-center justify-between w-full">
-            <Skeleton className="w-[130px] h-[45px] rounded-xl bg-btn-5" />
-            <Skeleton className="w-[130px] h-[45px] rounded-xl bg-btn-5" />
+            <Skeleton className="w-[130px] h-[45px] rounded-xl bg-back-3" />
+            <Skeleton className="w-[130px] h-[45px] rounded-xl bg-back-3" />
           </div>
         </div>
       )}

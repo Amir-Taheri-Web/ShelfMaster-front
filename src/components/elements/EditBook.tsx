@@ -25,6 +25,7 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean | undefined>(
     undefined
   );
+  const [isContentOpen, setIsContentOpen] = useState<boolean>(false);
 
   const fetchBook = async (): Promise<void> => {
     try {
@@ -32,7 +33,7 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/book/${bookId}`
       );
       const data: any = await res.json();
-      // console.log(data);
+      console.log(data);
 
       setBook(data);
     } catch (error) {
@@ -42,8 +43,9 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
   };
 
   useEffect(() => {
-    fetchBook();
-  }, []);
+    console.log(isContentOpen);
+    if (isContentOpen) fetchBook();
+  }, [isContentOpen]);
 
   useEffect(() => {
     if (message.label && message.label === "success") {
@@ -60,6 +62,7 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
       <Dialog open={isDialogOpen}>
         <DialogTrigger
           onClick={() => {
+            setIsContentOpen(true);
             if (isDialogOpen === false) setIsDialogOpen(undefined);
           }}
           className="text-btn-3 hover:opacity-70 transition-all"
