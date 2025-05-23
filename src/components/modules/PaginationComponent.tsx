@@ -29,7 +29,7 @@ const PaginationComponent: FC<TPaginationComponentProps> = ({
     <div className="">
       <Pagination>
         <PaginationContent>
-          {pages.map((item, index) => (
+          {pages.map((_, index) => (
             <PaginationItem key={index}>
               <PaginationLink
                 href={

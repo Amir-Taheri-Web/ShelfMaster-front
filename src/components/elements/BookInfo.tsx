@@ -67,7 +67,7 @@ const BookInfo: FC<TBookInfoProps> = ({ bookId }) => {
 
                 <div className="flex flex-col gap-2">
                   <span className="font-medium">خلاصه:</span>
-                  <p className="leading-8 text-justify">{e2p(book.summary)}</p>
+                  <p className="leading-8 text-justify max-h-[300px] overflow-y-auto summary-scrollbar">{e2p(book.summary)}</p>
                 </div>
 
                 <div className="flex items-center flex-wrap justify-between gap-4 mb-4 mt-8">
