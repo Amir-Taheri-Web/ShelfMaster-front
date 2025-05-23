@@ -153,3 +153,23 @@
 @utility error-message {
   @apply text-sm max-sm:text-xs max-sm:min-h-[20px] text-btn-2 min-h-[25px] w-[25rem] max-sm:w-full max-h-[50px] leading-6;
 }
+
+@utility books-scrollbar {
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #dfdfdf;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #dfdfdf;
+  }
+}

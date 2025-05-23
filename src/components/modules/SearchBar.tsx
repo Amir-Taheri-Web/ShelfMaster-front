@@ -3,9 +3,9 @@ import { TSearchBarProps } from "@/types/index.types";
 import Form from "next/form";
 import { FC } from "react";
 
-const SearchBar: FC<TSearchBarProps> = async ({ searchQuery }) => {
+const SearchBar: FC<TSearchBarProps> = async ({ searchQuery, page }) => {
   return (
-    <Form action="/" className="flex items-center gap-3 max-sm:gap-1 sm:grow">
+    <Form action={`${page ? "/?page" : "/"}`} className="flex items-center gap-3 max-sm:gap-1 sm:grow">
       <SearchButton />
 
       <input

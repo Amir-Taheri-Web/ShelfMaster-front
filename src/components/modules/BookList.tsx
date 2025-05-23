@@ -16,7 +16,7 @@ const BookList: FC<TBookListProps> = ({ books }) => {
           <span className="w-[92px]"></span>
         </li>
 
-        <div className="bg-back-2 rounded-b-4xl max-sm:rounded-b-2xl grow h-[500px] max-md:h-[300px] overflow-y-auto">
+        <div className="bg-back-2 rounded-b-4xl max-sm:rounded-b-2xl grow h-[500px] max-md:h-[300px] overflow-y-auto books-scrollbar">
           {books &&
             books.length > 0 &&
             books?.map((item, index) => (

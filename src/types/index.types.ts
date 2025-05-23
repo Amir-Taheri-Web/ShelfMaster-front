@@ -41,6 +41,7 @@ export type THomePageProps = {
   booksData: TBooksData;
   username: string;
   searchQuery: string | string[];
+  pageQuery: string | string[];
 };
 
 export type TBookListProps = {
@@ -50,6 +51,7 @@ export type TBookListProps = {
 export type THeaderProps = {
   username: string;
   searchQuery: string | string[];
+  page: string | string[];
 };
 
 export type TDeleteBookProps = {
@@ -66,8 +68,16 @@ export type THomeProps = {
 
 export type TSearchBarProps = {
   searchQuery: string | string[];
+  page: string | string[];
 };
 
 export type TBookInfoProps = {
   bookId: string;
+};
+
+export type TPaginationComponentProps = {
+  totalPages: number;
+  search: string | string[];
+  pageNumber: string | string[];
+  totalBooks: number;
 };

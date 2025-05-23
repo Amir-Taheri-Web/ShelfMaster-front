@@ -14,15 +14,30 @@ const Home: FC<THomeProps> = async ({ searchParams }) => {
 
   const username = cookieStore.get("username")?.value || "کاربر";
 
-  const searchQuery = (await searchParams)?.search;
+  const searchParamsValues = await searchParams;
 
-  const title: string = !!searchQuery ? `?title=${searchQuery}` : "";
+  const searchQuery: string | string[] | undefined = searchParamsValues?.search;
+  const title: string = !!searchQuery ? `title=${searchQuery}` : "";
 
-  const res: Response = await fetch(`${process.env.BASE_URL}/book${title}`);
+  const pageQuery: string | string[] | undefined = searchParamsValues?.page;
+  const pageNumber: string = !!pageQuery ? `page=${pageQuery}` : "";
+
+  const res: Response = await fetch(
+    `${process.env.BASE_URL}/book${
+      pageQuery || searchQuery ? "?" : ""
+    }${title}${pageQuery && searchQuery ? "&" : ""}${pageNumber}`
+  );
 
   const booksData: TBooksData = await res.json();
 
-  return <HomePage booksData={booksData} username={username} searchQuery={searchQuery || ""} />;
+  return (
+    <HomePage
+      booksData={booksData}
+      username={username}
+      searchQuery={searchQuery || ""}
+      pageQuery={pageQuery || ""}
+    />
+  );
 };
 
 export default Home;

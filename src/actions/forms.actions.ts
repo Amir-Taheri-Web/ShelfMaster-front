@@ -27,7 +27,10 @@ const addBookAction = async (
     };
 
   if (!summary || summary.length < 10 || summary.length > 2000)
-    return { label: "error", message: "خلاصه باید بین ۱۰ تا ۲۰۰۰ کاراکتر باشد" };
+    return {
+      label: "error",
+      message: "خلاصه باید بین ۱۰ تا ۲۰۰۰ کاراکتر باشد",
+    };
 
   if (!quantityValidation(p2e(quantity)))
     return { label: "error", message: "تعداد باید عدد و بین ۱ تا ۳۰۰ باشد" };
@@ -162,21 +165,18 @@ const deleteBookAction = async (prevState: {
   const token: string = (await cookies()).get("token")?.value || "";
 
   try {
-    const res: Response = await fetch(
-      `${process.env.BASE_URL}/book/${prevState.bookId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `BearerAuth ${token}`,
-        },
-      }
-    );
-    await res.json();
+    await fetch(`${process.env.BASE_URL}/book/${prevState.bookId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `BearerAuth ${token}`,
+      },
+    });
 
     revalidatePath("/");
     return { bookId: "", label: "success", message: "کتاب حذف شد" };
   } catch (error) {
+    console.log(error);
     return {
       ...prevState,
       label: "error",
