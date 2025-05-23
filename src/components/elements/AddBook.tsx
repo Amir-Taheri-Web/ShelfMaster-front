@@ -43,7 +43,7 @@ const AddBook = () => {
           className="text-txt-3 bg-btn-1 rounded-xl font-medium px-8 py-3 max-md:px-6 max-sm:p-[6px] max-sm:rounded-full max-sm:text-sm hover:opacity-70 transition-all"
         >
           <span className="max-sm:hidden">افزودن کتاب</span>
-          <span>
+          <span className="sm:hidden">
             <Plus className="size-[17px]" />
           </span>
         </DialogTrigger>
