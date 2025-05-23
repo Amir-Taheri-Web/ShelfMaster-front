@@ -11,7 +11,6 @@ import {
 } from "@/ui/dialog";
 import { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Plus } from "lucide-react";
 
 const AddBook = () => {
   const [message, formAction, isPending] = useActionState(addBookAction, {
@@ -40,12 +39,9 @@ const AddBook = () => {
           onClick={() => {
             if (isDialogOpen === false) setIsDialogOpen(undefined);
           }}
-          className="text-txt-3 bg-btn-1 rounded-xl font-medium px-8 py-3 max-md:px-6 max-sm:p-[6px] max-sm:rounded-full max-sm:text-sm hover:opacity-70 transition-all"
+          className="text-txt-3 bg-btn-1 rounded-xl font-medium px-8 py-3 max-md:px-6 max-sm:px-4 max-sm:py-2 max-sm:rounded-full max-sm:text-sm hover:opacity-70 transition-all"
         >
-          <span className="max-sm:hidden">افزودن کتاب</span>
-          <span className="sm:hidden">
-            <Plus className="size-[17px]" />
-          </span>
+          افزودن کتاب
         </DialogTrigger>
         <DialogContent className="max-sm:rounded-3xl! max-h-[calc(100vh-4rem)] overflow-y-auto">
           <DialogTitle className="mx-auto text-center font-medium text-xl text-txt-1 mt-4">

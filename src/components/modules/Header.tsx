@@ -15,7 +15,7 @@ import { THeaderProps } from "@/types/index.types";
 
 const Header: FC<THeaderProps> = ({ username, searchQuery, page }) => {
   return (
-    <header className="bg-back-2 border border-line-1 flex items-center gap-4 rounded-2xl py-3 px-8 max-md:py-2 max-md:px-6 max-sm:px-3">
+    <header className="bg-back-2 border border-line-1 flex items-center gap-4 rounded-2xl py-3 px-8 max-md:px-6 max-sm:px-3">
       <SearchBar searchQuery={searchQuery} page={page} />
 
       <DropdownMenu dir="rtl">
