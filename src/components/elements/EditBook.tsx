@@ -32,7 +32,7 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/book/${bookId}`
       );
       const data: any = await res.json();
-      console.log(data);
+      // console.log(data);
 
       setBook(data);
     } catch (error) {

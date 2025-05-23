@@ -2,7 +2,9 @@ import BookInfo from "@/elements/BookInfo";
 import DeleteBook from "@/elements/DeleteBook";
 import EditBook from "@/elements/EditBook";
 import { TBookListProps } from "@/types/index.types";
+import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog";
 import { e2p, sp } from "@/utils/convert";
+import { Info } from "lucide-react";
 import { FC } from "react";
 const BookList: FC<TBookListProps> = ({ books }) => {
   return (
@@ -31,9 +33,16 @@ const BookList: FC<TBookListProps> = ({ books }) => {
                 <span className="w-[100px]">{sp(item.price)} تومان</span>
                 <span className="w-[150px]">{item.id}</span>
                 <span className="flex items-center gap-4 w-[92px]">
-                  <BookInfo bookId={item.id} />
+                  <Dialog>
+                    <DialogTrigger className="text-btn-1 hover:opacity-70 transition-all">
+                      <Info className="size-[20px]" />
+                    </DialogTrigger>
+                    <DialogContent className="max-sm:rounded-3xl! max-h-[calc(100vh-4rem)] max-sm:px-4 overflow-y-auto text-txt-1">
+                      <BookInfo bookId={item.id} />
+                    </DialogContent>
+                  </Dialog>
 
-                  <EditBook bookId={item.id} />
+                  {/* <EditBook bookId={item.id} /> */}
 
                   <DeleteBook bookId={item.id} />
                 </span>

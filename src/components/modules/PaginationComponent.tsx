@@ -22,7 +22,6 @@ const PaginationComponent: FC<TPaginationComponentProps> = ({
     for (let i = 0; i < totalPages; i++) {
       pages[i] = i;
     }
-    console.log(pages);
   }
 
   return (
