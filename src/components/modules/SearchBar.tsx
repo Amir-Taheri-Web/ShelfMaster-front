@@ -13,7 +13,7 @@ const SearchBar: FC<TSearchBarProps> = async ({ searchQuery, page }) => {
         name="search"
         defaultValue={searchQuery}
         placeholder="جستجو کتاب"
-        className="placeholder:text-txt-6 w-full max-xm:w-[130px]! text-txt-1"
+        className="placeholder:text-txt-6 max-sm:text-sm w-full max-xm:w-[130px]! text-txt-1"
       />
     </Form>
   );

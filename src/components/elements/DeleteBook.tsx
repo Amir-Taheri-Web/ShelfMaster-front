@@ -67,7 +67,7 @@ const DeleteBook: FC<TDeleteBookProps> = ({ bookId }) => {
           </DialogTitle>
 
           <div className="flex items-center gap-4 max-xs:flex-col max-xs:w-full">
-            <form action={formAction}>
+            <form className="w-full" action={formAction}>
               <button
                 type="submit"
                 className="font-medium bg-btn-2 text-txt-3 px-16 py-2 rounded-xl w-full hover:opacity-70 transition-all"

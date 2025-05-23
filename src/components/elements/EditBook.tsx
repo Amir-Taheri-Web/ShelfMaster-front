@@ -33,7 +33,6 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/book/${bookId}`
       );
       const data: any = await res.json();
-      console.log(data);
 
       setBook(data);
     } catch (error) {
@@ -43,7 +42,6 @@ const EditBook: FC<TEditBookProps> = ({ bookId }) => {
   };
 
   useEffect(() => {
-    console.log(isContentOpen);
     if (isContentOpen) fetchBook();
   }, [isContentOpen]);
 

@@ -15,11 +15,11 @@ import { THeaderProps } from "@/types/index.types";
 
 const Header: FC<THeaderProps> = ({ username, searchQuery, page }) => {
   return (
-    <header className="bg-back-2 border border-line-1 flex items-center gap-4 rounded-2xl py-3 px-8 max-md:py-2 max-md:px-6">
+    <header className="bg-back-2 border border-line-1 flex items-center gap-4 rounded-2xl py-3 px-8 max-md:py-2 max-md:px-6 max-sm:px-3">
       <SearchBar searchQuery={searchQuery} page={page} />
 
       <DropdownMenu dir="rtl">
-        <DropdownMenuTrigger className="flex items-center justify-center gap-3 border-r border-line-1 pr-4 max-sm:mr-auto outline-none!">
+        <DropdownMenuTrigger className="flex items-center justify-center gap-3 max-xm:gap-2 border-r border-line-1 pr-4 max-xm:pr-2 max-sm:mr-auto outline-none!">
           <Image
             src={avatar}
             alt="avatar"
@@ -32,7 +32,7 @@ const Header: FC<THeaderProps> = ({ username, searchQuery, page }) => {
           />
 
           <span className="flex flex-col w-full items-start">
-            <span className="text-txt-1 font-medium max-md:text-sm overflow-x-hidden whitespace-nowrap text-ellipsis max-xm:w-[100px]! max-xs:w-[50px]! no-scrollbar">
+            <span className="text-txt-1 font-medium max-md:text-sm overflow-x-hidden whitespace-nowrap text-ellipsis max-xm:w-[100px]! max-sm:text-start max-xs:w-[50px]! no-scrollbar">
               {username}
             </span>
             <span className="text-sm text-txt-1 max-md:text-xs">ادمین</span>
